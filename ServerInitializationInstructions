@@ -1,0 +1,6 @@
+Server Initialization instructions
+
+1. Install package manager : npm
+
+sudo apt-get install nodejs npm
+
