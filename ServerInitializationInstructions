@@ -17,6 +17,8 @@ create app.js file
 
 node app.js
 
+load http://localhost:3000/ in a browser to see the output.
+
 ////////////////////////// Run the Server //////////////////////////
 
 
