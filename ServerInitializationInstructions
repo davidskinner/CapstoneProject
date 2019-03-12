@@ -7,12 +7,16 @@ https://www.youtube.com/watch?time_continue=33&v=oa9m8321_nw
 For Linux:
 sudo apt-get install nodejs npm 
 
-To install the http-Server
-npm install http-server
+To install Express
+npm install express
+create app.js file
+
+////////////////////////// Server Initialization //////////////////////////
 
 ////////////////////////// Run the Server //////////////////////////
 
-./runServer.sh
+node app.js
 
+////////////////////////// Run the Server //////////////////////////
 
 
