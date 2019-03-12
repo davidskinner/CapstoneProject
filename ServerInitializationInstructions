@@ -1,0 +1,22 @@
+////////////////////////// Server Initialization //////////////////////////
+
+1. Install package manager : npm
+** for reference **
+https://www.youtube.com/watch?time_continue=33&v=oa9m8321_nw
+
+For Linux:
+sudo apt-get install nodejs npm 
+
+To install Express
+npm install express
+create app.js file
+
+////////////////////////// Server Initialization //////////////////////////
+
+////////////////////////// Run the Server //////////////////////////
+
+node app.js
+
+////////////////////////// Run the Server //////////////////////////
+
+

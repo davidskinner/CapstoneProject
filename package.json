@@ -1,15 +1,25 @@
 {
-  "name": "Audio-Package",
+  "name": "capstoneproject",
   "version": "1.0.0",
-  "dependencies": {
-    "canvasjs": "^1.8.1",
-    "johnny-five": "^1.0.0",
-    "moment": "^2.24.0",
-    "node-dweetio": "0.0.11",
-    "socket.io": "^2.2.0"
-  },
+  "description": "This is the server for Capstone.",
+  "main": "index.js",
   "scripts": {
-    "server-start": "node ./server.js",
-    "start": "node ./app.js"
+    "start": "node index.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidskinner/CapstoneProject.git"
+  },
+  "author": "David Skinner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidskinner/CapstoneProject/issues"
+  },
+  "homepage": "https://github.com/davidskinner/CapstoneProject#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http-server": "^0.11.1",
+    "server": "^1.0.18"
   }
 }
