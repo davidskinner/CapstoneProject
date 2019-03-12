@@ -1,0 +1,55 @@
+body {
+  background-color: white;
+}
+
+#canvasRoute{
+
+  right: 32px;
+  margin-top: auto;
+  position: absolute;
+}
+
+#canvasPoint{
+
+  right: 32px;
+  margin-top: auto;
+  position: absolute;
+}
+
+#canvasStatusImage{
+  left: 32px;
+  top: 196px;
+  position: absolute;
+}
+
+h1 {
+  background-color: green;
+  color: white;
+  padding: 32px 32px;
+  box-shadow: 2px 2px gray;
+  text-shadow: 2px 2px gray;
+}
+
+#count{
+  text-align: center;
+  font-size: 14pt;
+  margin-top: 128px;
+}
+
+#buttonDiv{
+  text-align: center;
+  margin-top: auto;
+}
+
+#buttonDiv2{
+  text-align: center;
+  margin-top: 8px;
+}
+
+#info{
+  text-align: center;
+}
+
+#status{
+  font-size: 20pt;
+}

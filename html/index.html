@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bus Count information</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+<!--Canvous Movement-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script type="text/javascript" src="./buttonMove.js"></script>
+<!--CSS to be added-->
+
+</head>
+<h1>
+Green Bus Route
+</h1>
+
+<script>
+function openStatsPage(){
+  saveData();
+	window.location.assign("Stats.html");
+}
+
+function reset(){
+  clearData();
+	window.location.reload();
+}
+
+function showImage(src,width,alt){
+	var img = document.createElement(src);
+	img.src = src;
+	img.alt = alt;
+	document.body.appendChild(img);
+}
+</script>
+
+<body  onload="loadedPage()">
+
+<canvas id="canvasRoute" width="300px" height="450px" ></canvas>
+<canvas id="canvasPoint" width="300px" height="450px" ></canvas>
+
+<p id="count">
+Current Passengers:
+<span id="Count">
+</span>
+</p>
+
+<p id="info">
+  <span id="students"></span>
+  students have ridden the bus today resulting in
+  <span id="carbonDifference"></span>
+  kg<br> less of carbon.<br><br>
+  Current Status:<br>
+  <span id="status"></span><br><br>
+  <span id="statusMessage"></span><br>
+</p>
+
+<div id="buttonDiv">
+<button type="button" style="background-color: siver; border: none; padding: 4px 8px; box-shadow: 2px 2px gray;" onclick="moveStop();">Advance stop</button>
+<button type="button" style="background-color: siver; border: none; padding: 4px 8px; box-shadow: 2px 2px gray;" onclick="openStatsPage()">More Info</button>
+<button type="button" style="background-color: siver; border: none; padding: 4px 8px; box-shadow: 2px 2px gray;" onclick="reset()">Reset</button>
+</div>
+
+<div id="buttonDiv2">
+  <button type="button" style="background-color: siver; border: none; padding: 4px 8px; box-shadow: 2px 2px gray;" onclick="addPassenger()">Passenger +1</button>
+  <button type="button" style="background-color: siver; border: none; padding: 4px 8px; box-shadow: 2px 2px gray;" onclick="subractPassenger()">Passenger -1</button>
+</div>
+
+<canvas id="canvasStatusImage" width="300px" height="375px" ></canvas>
+
+</body>
+
+</html>

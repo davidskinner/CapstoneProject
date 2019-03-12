@@ -1,0 +1,15 @@
+{
+  "name": "Audio-Package",
+  "version": "1.0.0",
+  "dependencies": {
+    "canvasjs": "^1.8.1",
+    "johnny-five": "^1.0.0",
+    "moment": "^2.24.0",
+    "node-dweetio": "0.0.11",
+    "socket.io": "^2.2.0"
+  },
+  "scripts": {
+    "server-start": "node ./server.js",
+    "start": "node ./app.js"
+  }
+}
