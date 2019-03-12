@@ -1,6 +1,18 @@
 Server Initialization instructions
 
 1. Install package manager : npm
+** for reference **
+https://www.youtube.com/watch?time_continue=33&v=oa9m8321_nw
 
-sudo apt-get install nodejs npm
+For Linux:
+sudo apt-get install nodejs npm 
+
+To install the http-Server
+npm install http-server
+
+To Run the server go the the WebServer directory and type:
+
+./runServer.sh
+
+
 

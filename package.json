@@ -1,0 +1,22 @@
+{
+  "name": "capstoneproject",
+  "version": "1.0.0",
+  "description": "This is the server for Capstone.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidskinner/CapstoneProject.git"
+  },
+  "author": "David Skinner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidskinner/CapstoneProject/issues"
+  },
+  "homepage": "https://github.com/davidskinner/CapstoneProject#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
