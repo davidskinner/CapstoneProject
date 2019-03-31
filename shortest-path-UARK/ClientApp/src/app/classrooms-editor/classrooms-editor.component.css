@@ -1,0 +1,21 @@
+/* TODO: ClassroomsEditorComponent's private CSS styles */
+.classroom-box {
+    /** Shorthand property: top&bottom right&left */
+    padding: 10px;
+    /** Shorthand property for setting border width, style, and color.  */
+    border: 1px solid #444;
+    background: #eee;
+}
+label {
+    /** Display inline-level element <label> as a block-level element */
+    display: block;
+    /** Define the width of the content area of <label> */
+    width: 9em;
+    /** Shorthand property (2 values): top&bottom right&left */
+    margin: .5em 0;
+}
+h2 {
+    /** Shorthand property (4 values): top right bottom left */
+    margin: 25px 0px 5px 0px;
+    font-size: 1.3em;
+}

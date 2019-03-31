@@ -1,0 +1,16 @@
+<div class="title-container">
+  <h1>{{ title }}</h1>
+
+  <!-- A navigation link (routerLink) (i.e. to allow a user to click a link to navigate.) -->
+  <nav>
+    <a class="class-editor" routerLink="/classrooms-editor">Find</a>
+    <a class="map" routerLink="/schoolMap">Map</a>
+  </nav>
+  
+</div>
+
+<!-- Display routed views -->
+<router-outlet></router-outlet>
+
+<!-- TODO: Delete. Testing only. To display the generated MessagesComponent.-->
+<app-messages></app-messages>

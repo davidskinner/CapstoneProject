@@ -1,0 +1,46 @@
+<h2>Class(es)</h2>
+<form [formGroup]="classroomForm" (ngSubmit)="onSubmit()">
+
+  <div formArrayName="classrooms">
+
+    <!-- <div> defines a section in a document (block-level). Used as a container for other HTML elements -->
+    <div *ngFor="let classroom of classroomForm.controls['classrooms'].controls; let i = index">
+      
+      <div class="classroom-box" formGroupName="{{i}}">
+
+        <label>
+          Name:
+          <input type="text" formControlName="className">
+        </label>
+
+        <label>
+          Building:
+          <input type="text" formControlName="buildingName" required>
+        </label>
+
+        <label>
+          Time:
+          <input type="text" formControlName="classTime" required>
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <button type="submit" [disabled]="!classroomForm.valid">
+      Submit
+  </button>
+
+  <button (click)="addClassroom()">
+      <div>+</div>
+  </button>
+
+</form>
+
+<!-- TESTING: Display to screen -->
+<div>
+  <p>Form Validity: {{ classroomForm.valid }}</p>
+  <p>Form Value: {{ classroomForm.value | json }}</p>
+</div>

@@ -1,0 +1,65 @@
+/*  You can add global styles to this file, and also import other style files 
+*   To maintain a consistent look across the application.
+*/
+/* Application-wide Styles */
+h1, h2 {
+    color: #444;
+}
+input[type="text"] {
+    color: #444;
+    height: 1.5em;
+    font-size: .75em;
+    border: 1px solid #444;
+    border-radius: 4px;
+}
+button {
+    /** Shorthand property (2 values): top&bottom right&left */
+    margin: 5px 1px;
+    /** Shorthand property (2 values): top&bottom right&left */
+    padding: 5px 10px;
+    font-size: 1em;
+    color: #607d8b;
+    background-color: #eee;
+    /** Shorthand property for setting border width, style, and color.  */
+    border: 1px solid #444;
+    /** Property to create rounded corners. */
+    border-radius: 5px;
+}
+button:hover {
+    color: rgb(175,0,1);
+    background-color: #cfd8dc;
+}
+nav a {
+    /** Generate a block box that will be flowed w/ surrounding content */
+    display: inline-block;
+    /** Shorthand property (2 values): top&bottom right&left */
+    padding: 5px 10px;
+    /** Remove default line under hyperlink */
+    text-decoration: none;
+    font-size: 1em;
+    background-color: white;
+    border: 1px solid #444;
+    /** Property to create rounded corners. */
+    border-radius: 5px;
+}
+/** 'a:link'- Normal or unvisited link that has no mouse pointer over it.
+*   'a:visited'- Link user has visited, but has no mouse pointer over it.
+*/
+nav a:link, a:visited {
+    color: #607d8b;
+}
+/** Link when user places mouse pointer over it.*/
+nav a:hover {
+    color: rgb(175,0,1);
+    /** TESTING */
+    /*color:#039be5;*/
+    background-color: #cfd8dc;
+}
+/** Link in process of being clicked */
+nav a.active {
+    color: #039be5;
+}
+/*  Everywhere else. Universal Selector */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
