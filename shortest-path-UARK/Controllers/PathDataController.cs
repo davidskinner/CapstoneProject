@@ -29,12 +29,10 @@ namespace shortest_path_UARK.Controllers
          * 
          * To insert a new element at our endpoint.       
         */
-        [HttpPost]
+        [HttpPost("[action]")]
         public Classrooms onSubmit([FromFormAttribute]Classrooms classroom)
         {
-            /** 
-             * TESTING: Need some way of testing if server indeed gets this info.
-            */
+            /** TESTING: ...*/
             return classroom;
         }
 
