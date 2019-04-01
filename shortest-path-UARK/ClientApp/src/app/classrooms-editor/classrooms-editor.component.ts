@@ -24,9 +24,9 @@ export class ClassroomsEditorComponent implements OnInit {
 
   /** Initialize the classroomForm */
   initializeForm(): void {
-    let classrooms: FormArray = new FormArray([]);
+    let classroom: FormArray = new FormArray([]);
     this.classroomForm = new FormGroup({
-      classrooms: classrooms
+      classroom: classroom
     })
 
     /** Create the first class */
@@ -40,12 +40,12 @@ export class ClassroomsEditorComponent implements OnInit {
     /** https://www.tutorialrepublic.com/javascript-tutorial/javascript-if-else-statements.php
      * Ternary Operator: var result = (condition) ? value1 : value2, where value1 is true and value2 is false
      * */
-    let className = classroom ? classroom.className : '';
+    let ClassName = classroom ? classroom.ClassName : '';
     let buildingName = classroom ? classroom.buildingName : '';
     let classTime = classroom ? classroom.classTime : '';
-    (<FormArray>this.classroomForm.controls['classrooms']).push(
+    (<FormArray>this.classroomForm.controls['classroom']).push(
       new FormGroup({
-        className: new FormControl(className),
+        ClassName: new FormControl(ClassName),
         buildingName: new FormControl(buildingName, Validators.required),
         classTime: new FormControl(classTime, Validators.required)
       })

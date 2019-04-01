@@ -9,7 +9,9 @@
 */
 
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using shortestpathUARK.Models;
 
 namespace shortest_path_UARK.Controllers
 {
@@ -29,12 +31,19 @@ namespace shortest_path_UARK.Controllers
          * 
          * To insert a new element at our endpoint.       
         */
-        [HttpPost("[action]")]
-        public Classrooms onSubmit([FromFormAttribute]Classrooms classroom)
+        [Route("/api/PathData/onSubmit")]
+        [HttpPost]
+        public void OnSubmit([FromBody]Classroom classroom)
         {
             /** TESTING: ...*/
-            return classroom;
+            Console.WriteLine(classroom.ClassName);
         }
+
+        //[HttpPost]
+        //public Task<ActionResult> AngularData(Classroom classroom)
+        //{
+        //    //return Json(new { foo = "bar", baz = "Blech" });
+        //}
 
         /** 
          * TODO: Implement method
@@ -51,15 +60,6 @@ namespace shortest_path_UARK.Controllers
         /** 
          * C# is strongly typed, so we need to create a model.      
         */
-        public class Classrooms
-        {
-            /** 
-             * Properties
-             * Properties of Classrooms
-             * JOSE: Property should be something like a FormGroup because the relevant
-             * method (onSubmit in classroom.service.ts) is a FormGroup.       
-            */
-            //...
-        }
+
     }
 }

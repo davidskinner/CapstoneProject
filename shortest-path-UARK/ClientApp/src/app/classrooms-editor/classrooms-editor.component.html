@@ -1,16 +1,16 @@
 <h2>Class(es)</h2>
 <form [formGroup]="classroomForm" (ngSubmit)="onSubmit()">
 
-  <div formArrayName="classrooms">
+  <div formArrayName="classroom">
 
     <!-- <div> defines a section in a document (block-level). Used as a container for other HTML elements -->
-    <div *ngFor="let classroom of classroomForm.controls['classrooms'].controls; let i = index">
+    <div *ngFor="let classroom of classroomForm.controls['classroom'].controls; let i = index">
       
       <div class="classroom-box" formGroupName="{{i}}">
 
         <label>
           Name:
-          <input type="text" formControlName="className">
+          <input type="text" formControlName="ClassName">
         </label>
 
         <label>

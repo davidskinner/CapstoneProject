@@ -69,12 +69,11 @@ namespace shortest_path_UARK
             {
                 /** 
                  * TODO: Setup to match PathDataController.cs. This is setup for
-                 * the template.
-                 * DONE.
+                 * the template.        
                 */
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}");
+                    template: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
@@ -86,13 +85,8 @@ namespace shortest_path_UARK
 
                 if (env.IsDevelopment())
                 {
-                    /** 
-                     * https://docs.microsoft.com/en-us/aspnet/core/client-side/spa/angular?view=aspnetcore-2.2&tabs=visual-studio
-                     * Won't launch an Angular ClI server, but instead use the
-                     * instance you start manually. Enables it to start and restart faster.
-                    */
-                    //spa.UseAngularCliServer(npmScript: "start");
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    //spa.UseAngularCliServer(npmScript: "start"); // uncomment this
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200"); // comment this out
                 }
             });
         }
