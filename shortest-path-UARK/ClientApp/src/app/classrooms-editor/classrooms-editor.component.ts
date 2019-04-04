@@ -55,10 +55,10 @@ export class ClassroomsEditorComponent implements OnInit {
   /** Method will send the 'JSON' with all the class information to the server.
   */
  onSubmit() {
-    // TESTING:...
-    console.warn(this.classroomForm.value);
-    
     this.classroomService.onSubmit(this.classroomForm.value)
-      .subscribe();
+      .subscribe(
+        /** TESTING:... */
+        variableName => console.warn(this.classroomForm.value)
+      );
   }
 }

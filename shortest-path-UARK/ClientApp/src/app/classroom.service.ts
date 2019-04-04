@@ -26,7 +26,7 @@ export class ClassroomService {
   * base is the resource to which requests are made.
   * collectionName...data object 
   */
-  private baseUrl = 'api/PathData/onSubmit';
+  private baseUrl = 'api/PathData/PostClassrooms';
 
   /* Inject HttpClient, Inject MessageService */
   constructor(

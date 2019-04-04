@@ -74,6 +74,7 @@ namespace shortest_path_UARK
                 */
                 routes.MapRoute(
                     name: "default",
+                    /** URI for the list of all the classrooms */
                     template: "{controller}/{action}");
             });
 
