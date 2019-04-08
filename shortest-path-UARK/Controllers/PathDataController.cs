@@ -10,10 +10,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Xml;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using shortestpathUARK.Models;
 
 namespace shortest_path_UARK.Controllers
@@ -29,25 +34,18 @@ namespace shortest_path_UARK.Controllers
     [Route("api/[controller]")]
     public class PathDataController : Controller
     {
-        /** ... */
-        /*private IClassroomsRepository _repository;
-
-        public PathDataController(IClassroomsRepository repository)
-        {
-            _repository = repository;
-        }*/
-
         /** 
          * TODO: Better design (dependency injection)
          *         
          * ..."not the best design"...better approach see the link.
          * https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/dependency-injection 
         */
-        static readonly IClassroomsRepository repository = new ClassroomsRepository();
+        static readonly IJsonDataTransferObjectRepository repository = new JsonDataTransferObjectRepository();
 
         /** 
          * TODO: Implement method
          * 
+         * TODO: Summarize comments        
          * https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/        
          * Internet Media Types (MIME type), identifies the format of a piece of data.
          * In HTTP, media types describe the format of the message body. A media
@@ -91,12 +89,83 @@ namespace shortest_path_UARK.Controllers
          * w/ complex types are deserialized from the request body. We expect the
          * client to send a serialized representation of a classrooms object, in
          * ...JSON format.
+         * 
+         * TODO: Explain [FromBody], the missing piece of the puzzle.
         */
         [HttpPost("[action]")]
-        public Classrooms PostClassrooms(Classrooms classroom)
+        public JsonDataTransferObject PostClassrooms([FromBody]JsonDataTransferObject classroomObject)
         {
-            classroom = repository.Add(classroom);
-            return classroom;
+            // TODO: Remove comments and testing
+            // TESTING: Trying to print the contents of the nested JSON object to
+            // Application Output to confirm binding.
+            //
+            // JOSE: It should be clear from your testing below, that you have an
+            // object because Web API deserialized. And serialization is the solution
+            // in order to print the contents. But when you serialize, classrooms
+            // (your JSON w/ the information) outputs to null. Why? This is what
+            // you need to figure out.
+            // I'm thinking the cause is connected to your model (your representation (JsonDataTransferObject.cs))
+            // of the nested JSON object.
+            //
+            // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/serialization/
+            // Serialization is the process of converting an object into a stream of
+            // bytes to store the object or transmit it to memory. Main purpose
+            // is to save the state of an object in order to be able to recreate
+            // it when needed. Reverse process is called deserialization.
+            // Through serialization, a developer can perform actions like sending
+            // the object to a remote application by means of a Web Service...
+            // https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization?view=netframework-4.7.2
+            // Link contains the classes necessary for serializing and deserializing objects.
+
+            // JOSE: This is basically what i have been trying to test. Success!
+            // https://stackoverflow.com/questions/5166486/how-to-print-values-from-json-type-object-to-console-in-c-sharp
+            // Output:
+            // Loaded '/usr/local/share/dotnet/shared/Microsoft.NETCore.App/2.1.9/System.Runtime.Serialization.Primitives.dll'.Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+            // Loaded '/usr/local/share/dotnet/shared/Microsoft.NETCore.App/2.1.9/System.Diagnostics.TraceSource.dll'.Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+            // Loaded '/usr/local/share/dotnet/shared/Microsoft.NETCore.App/2.1.9/System.Data.Common.dll'.Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+            // Loaded '/usr/local/share/dotnet/shared/Microsoft.NETCore.App/2.1.9/System.Xml.ReaderWriter.dll'.Module was built without symbols.
+            // { "Classrooms":null}
+            Console.WriteLine();
+            Console.WriteLine("TESTING SerializeObject (PathDataController.cs)----------------------------------------");
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(classroomObject));
+            Console.WriteLine();
+
+            // JOSE: Web API deserializes from the request body meaning a stream of
+            // bytes is converted into an object, as you can see by the output.
+            // Output: shortestpathUARK.Models.JsonDataTransferObject
+            /*Console.WriteLine("TESTING Web API (PathDataController.cs)----------------------------------------");
+            Console.WriteLine(classroomObject);
+            Console.WriteLine();
+
+            // JOSE: This would throw an error. Trying to deserialize...when
+            // deserialization has already occured.
+            // Output: Exception thrown: 'Newtonsoft.Json.JsonReaderException' in Newtonsoft.Json.dll
+            Console.WriteLine("TESTING DeserializeObject (PathDataController.cs)----------------------------------------");
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.DeserializeObject<JsonDataTransferObject>(classroomObject.ToString()));
+            Console.WriteLine();*/
+
+            // JOSE: Seems like a long way of doing serialization like above...Printing
+            // the same result...Yeah this is not necessary, but leave it for now.
+            // Might be helpful in understanding the process.
+            // https://stackoverflow.com/questions/38793151/deserialize-nested-json-into-c-sharp-objects
+            string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(classroomObject);
+            using (var sr = new StringReader(jsonString))
+            using (var jr = new JsonTextReader(sr))
+            {
+                var serial = new JsonSerializer();
+                serial.Formatting = Newtonsoft.Json.Formatting.Indented;
+                var obj = serial.Deserialize<JsonDataTransferObject>(jr);
+
+                var reserializedJSON = JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented);
+
+                Console.WriteLine("Re-serialized JSON: ");
+                Console.WriteLine(reserializedJSON);
+            }
+
+            // TESTING
+            //classroomObject = repository.Add(classroomObject);
+
+            return classroomObject;
         }
 
         /** 

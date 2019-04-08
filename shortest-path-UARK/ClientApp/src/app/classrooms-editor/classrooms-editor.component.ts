@@ -52,8 +52,10 @@ export class ClassroomsEditorComponent implements OnInit {
     )
   }
 
-  /** Method will send the 'JSON' with all the class information to the server.
-  */
+ /** 
+ *   Method will send the data with all the class information to the server.
+ *   Nested JSON object.
+ */
  onSubmit() {
     this.classroomService.onSubmit(this.classroomForm.value)
       .subscribe(
