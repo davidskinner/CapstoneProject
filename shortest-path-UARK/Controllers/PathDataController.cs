@@ -9,16 +9,8 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Xml;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using shortestpathUARK.Models;
 
 namespace shortest_path_UARK.Controllers
@@ -35,17 +27,25 @@ namespace shortest_path_UARK.Controllers
     public class PathDataController : Controller
     {
         /** 
-         * TODO: Better design (dependency injection)
-         *         
+         * Provide the IJsonDataTransferObjectRepository as a constructor parameter
+         * using constructor injection (i.e. dependency injection).
+         * TODO: We might need the Web API Dependency Resolver.        
+        */
+        private readonly IJsonDataTransferObjectRepository _repository;
+
+        public PathDataController(IJsonDataTransferObjectRepository repository)
+        {
+            _repository = repository;
+        }
+
+        /** 
+         * TESTING...      
          * ..."not the best design"...better approach see the link.
          * https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/dependency-injection 
         */
-        static readonly IJsonDataTransferObjectRepository repository = new JsonDataTransferObjectRepository();
+        //static readonly IJsonDataTransferObjectRepository repository = new JsonDataTransferObjectRepository();
 
         /** 
-         * TODO: Implement method
-         * 
-         * TODO: Summarize comments        
          * https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/        
          * Internet Media Types (MIME type), identifies the format of a piece of data.
          * In HTTP, media types describe the format of the message body. A media
@@ -77,118 +77,58 @@ namespace shortest_path_UARK.Controllers
          * A key principle of HTTP is that resources are sent in the message body,
          * using content negotiation to specify the representation of the resource.
          * Media-type formatters were designed for exactly this purpose.
-         * [FromBody]- To force Web API to read a simple type from the request body
-         * (e.g. a raw JSON string (not a JSON object))
-         * Create a custom model binder, giving you access to the HTTP request,
-         * the action description, and the raw values from the route data.
-         * ...        
+         * [FromBody]- To force Web API to read a simple type from the request body.
+         * Web API will use a media-type formatter to read the value from the request body.
+         * When a parameter has [FromBody], Web API uses the Content-Type (e.g. "application/json")
+         * header to select a formatter.
          * 
          * https://docs.microsoft.com/en-us/aspnet/web-api/overview/older-versions/creating-a-web-api-that-supports-crud-operations
-         * Create a resource (new classroom). The client sends an HTTP POST request.
-         * The method takes a parameter of type Classrooms. In Web API, parameters
+         * Create a resource. The client sends an HTTP POST request.
+         * The method takes a parameter of type...In Web API, parameters
          * w/ complex types are deserialized from the request body. We expect the
          * client to send a serialized representation of a classrooms object, in
          * ...JSON format.
          * 
-         * TODO: Explain [FromBody], the missing piece of the puzzle.
-        */
-        [HttpPost("[action]")]
-        public JsonDataTransferObject PostClassrooms([FromBody]JsonDataTransferObject classroomObject)
-        {
-            // TODO: Remove comments and testing
-            // TESTING: Trying to print the contents of the nested JSON object to
-            // Application Output to confirm binding.
-            //
-            // JOSE: It should be clear from your testing below, that you have an
-            // object because Web API deserialized. And serialization is the solution
-            // in order to print the contents. But when you serialize, classrooms
-            // (your JSON w/ the information) outputs to null. Why? This is what
-            // you need to figure out.
-            // I'm thinking the cause is connected to your model (your representation (JsonDataTransferObject.cs))
-            // of the nested JSON object.
-            //
-            // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/serialization/
-            // Serialization is the process of converting an object into a stream of
-            // bytes to store the object or transmit it to memory. Main purpose
-            // is to save the state of an object in order to be able to recreate
-            // it when needed. Reverse process is called deserialization.
-            // Through serialization, a developer can perform actions like sending
-            // the object to a remote application by means of a Web Service...
-            // https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization?view=netframework-4.7.2
-            // Link contains the classes necessary for serializing and deserializing objects.
-
-            // JOSE: This is basically what i have been trying to test. Success!
-            // https://stackoverflow.com/questions/5166486/how-to-print-values-from-json-type-object-to-console-in-c-sharp
-            // Output:
-            // Loaded '/usr/local/share/dotnet/shared/Microsoft.NETCore.App/2.1.9/System.Runtime.Serialization.Primitives.dll'.Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-            // Loaded '/usr/local/share/dotnet/shared/Microsoft.NETCore.App/2.1.9/System.Diagnostics.TraceSource.dll'.Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-            // Loaded '/usr/local/share/dotnet/shared/Microsoft.NETCore.App/2.1.9/System.Data.Common.dll'.Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-            // Loaded '/usr/local/share/dotnet/shared/Microsoft.NETCore.App/2.1.9/System.Xml.ReaderWriter.dll'.Module was built without symbols.
-            // { "Classrooms":null}
-            Console.WriteLine();
-            Console.WriteLine("TESTING SerializeObject (PathDataController.cs)----------------------------------------");
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(classroomObject));
-            Console.WriteLine();
-
-            // JOSE: Web API deserializes from the request body meaning a stream of
-            // bytes is converted into an object, as you can see by the output.
-            // Output: shortestpathUARK.Models.JsonDataTransferObject
-            /*Console.WriteLine("TESTING Web API (PathDataController.cs)----------------------------------------");
-            Console.WriteLine(classroomObject);
-            Console.WriteLine();
-
-            // JOSE: This would throw an error. Trying to deserialize...when
-            // deserialization has already occured.
-            // Output: Exception thrown: 'Newtonsoft.Json.JsonReaderException' in Newtonsoft.Json.dll
-            Console.WriteLine("TESTING DeserializeObject (PathDataController.cs)----------------------------------------");
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.DeserializeObject<JsonDataTransferObject>(classroomObject.ToString()));
-            Console.WriteLine();*/
-
-            // JOSE: Seems like a long way of doing serialization like above...Printing
-            // the same result...Yeah this is not necessary, but leave it for now.
-            // Might be helpful in understanding the process.
-            // https://stackoverflow.com/questions/38793151/deserialize-nested-json-into-c-sharp-objects
-            string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(classroomObject);
-            using (var sr = new StringReader(jsonString))
-            using (var jr = new JsonTextReader(sr))
-            {
-                var serial = new JsonSerializer();
-                serial.Formatting = Newtonsoft.Json.Formatting.Indented;
-                var obj = serial.Deserialize<JsonDataTransferObject>(jr);
-
-                var reserializedJSON = JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented);
-
-                Console.WriteLine("Re-serialized JSON: ");
-                Console.WriteLine(reserializedJSON);
-            }
-
-            // TESTING
-            //classroomObject = repository.Add(classroomObject);
-
-            return classroomObject;
-        }
-
-        /** 
-         * TODO: Use this fancier method once you get the method above working.
-         * If you can get it to work 'CreateResponse' causes error.        
-         * 
          * Ideally we want the HTTP response to include the following:
-         *         
          * Response code: By default, the Web API framework sets the response code
          * to 200 (OK). But according to the HTTP/1.1 protocol, when a POST request
          * results in the creation of a resource, the server should reply with
          * status 201 (Created).
+         * Location: When the server creates a resource, it should include the URI
+         * of the new resource in the Location header of the response.        
          * 
-         * Location: JOSE: Not necessary for now (or at all) in my opinion since
-         * the Client is not getting anything from the server.       
+         * JOSE: Microsoft documentation seems to be outdated. Syntax described is
+         * incorrect, therefore ignore the sample method.    
+         * 
+         * https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/serialization/
+         * Serialization is the process of converting an object into a stream of
+         * bytes to store the object or transmit it to memory. Main purpose
+         * is to save the state of an object in order to be able to recreate
+         * it when needed. Reverse process is called deserialization.
+         * Through serialization, a developer can perform actions like sending
+         * the object to a remote application by means of a Web Service...
+         * 
+         * JOSE: Web API deserializes (i.e. stream of bytes is converted into an object)
+         * the parameter from the request body. Hence, we serialize (i.e. convert an
+         * object into a stream of bytes).        
+         * 
+         * TODO: Implement method and add proper HTTP response.
         */
-        /*
         [HttpPost("[action]")]
-        public HttpResponseMessage PostClassrooms(Classrooms classroom)
+        public JsonDataTransferObject PostClassrooms([FromBody]JsonDataTransferObject classroomObject)
         {
-            classroom = repository.Add(classroom);
-            var response = Request.CreateResponse<Classrooms>(HttpStatusCode.Created, classroom);
-            return response;
-        }*/
+            // TESTING: Print the contents of the nested JSON object to
+            // "Application Output" to confirm binding.
+            // https://stackoverflow.com/questions/5166486/how-to-print-values-from-json-type-object-to-console-in-c-sharp
+            Console.WriteLine();
+            Console.WriteLine("TESTING...");
+            Console.WriteLine(JsonConvert.SerializeObject(classroomObject));
+            Console.WriteLine();
+
+            // TESTING
+            //classroomObject = _repository.Add(classroomObject);
+
+            return classroomObject;
+        }
     }
 }

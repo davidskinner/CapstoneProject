@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using shortestpathUARK.Models;
 
+/** 
+ * C# is strongly typed, so we need to create a model. A model is an object
+ * that represents the data in your application.
+*/
 namespace shortestpathUARK.Models
 {
     public class JsonDataTransferObject
@@ -13,15 +17,16 @@ namespace shortestpathUARK.Models
     /** TODO: Define necessary methods. */
     public interface IJsonDataTransferObjectRepository
     {
-        //JsonDataTransferObject Add(JsonDataTransferObject classroom);
+        // TESTING
+        JsonDataTransferObject Add(JsonDataTransferObject classroom);
     }
 
-    /** 
-     * TODO: Implement the necessary methods. This method is more or less a template
-     * for other methods.    
-    */
     public class JsonDataTransferObjectRepository : IJsonDataTransferObjectRepository
     {
+        /** 
+        * TODO: Implement the necessary methods. This method is more or less a template
+        * for other methods.    
+        */
         private List<JsonDataTransferObject> classroomsList = new List<JsonDataTransferObject>();
 
         public JsonDataTransferObject Add(JsonDataTransferObject classroom)
