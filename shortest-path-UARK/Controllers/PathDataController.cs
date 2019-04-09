@@ -29,21 +29,23 @@ namespace shortest_path_UARK.Controllers
         /** 
          * Provide the IJsonDataTransferObjectRepository as a constructor parameter
          * using constructor injection (i.e. dependency injection).
-         * TODO: We might need the Web API Dependency Resolver.        
+         * TODO: We might need the Web API Dependency Resolver. We definitely do.
+         * This causes an error.
         */
+        /*
         private readonly IJsonDataTransferObjectRepository _repository;
 
         public PathDataController(IJsonDataTransferObjectRepository repository)
         {
             _repository = repository;
-        }
+        }*/
 
         /** 
          * TESTING...      
          * ..."not the best design"...better approach see the link.
          * https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/dependency-injection 
         */
-        //static readonly IJsonDataTransferObjectRepository repository = new JsonDataTransferObjectRepository();
+        static readonly IJsonDataTransferObjectRepository repository = new JsonDataTransferObjectRepository();
 
         /** 
          * https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/        
@@ -126,7 +128,7 @@ namespace shortest_path_UARK.Controllers
             Console.WriteLine();
 
             // TESTING
-            //classroomObject = _repository.Add(classroomObject);
+            //classroomObject = repository.Add(classroomObject);
 
             return classroomObject;
         }
