@@ -12,4 +12,9 @@ export class SchoolMapComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+  * TODO: http.get method to get the map image
+  */
+  //...
+
 }

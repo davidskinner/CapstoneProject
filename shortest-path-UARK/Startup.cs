@@ -1,12 +1,7 @@
-/** Here, we add features and services to our server.
-*
-*/
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,10 +17,9 @@ namespace shortest_path_UARK
         public IConfiguration Configuration { get; }
 
         /** This method gets called by the runtime. Use this method to add 
-         * services to the container. These services can then be requested via
-         * dependency injection in our classes constructors like Angular.       
-         */       
-
+        * services to the container. These services can then be requested via
+        * dependency injection in our classes constructors like Angular. 
+        */
         public void ConfigureServices(IServiceCollection services)
         {
             /** MVC-Service (Model-View-Controller). This service is responsible
@@ -68,9 +62,10 @@ namespace shortest_path_UARK
             app.UseMvc(routes =>
             {
                 /** 
-                 * TODO: Setup to match PathDataController.cs. This is setup for
-                 * the template.
-                 * DONE.
+                 * https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-2.2
+                 * Convention-based routing enables you to globally define the URL
+                 * formats that your application accepts and how each of those
+                 * formats maps to a specific action method on given controller.
                 */
                 routes.MapRoute(
                     name: "default",

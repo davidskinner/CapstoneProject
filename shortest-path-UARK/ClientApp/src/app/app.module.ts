@@ -4,35 +4,22 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-/* 
-TODO: Remove the following two imports. Testing purposes only. 
-Simulate communication w/ a remote server by using the In-memory Web API module
-*/
-//import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-//import { InMemoryDataService } from './in-memory-data.service';
-
 import { AppComponent } from './app.component';
 import { SchoolMapComponent } from './schoolMap/schoolMap.component';
 import { ClassroomsEditorComponent } from './classrooms-editor/classrooms-editor.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SchoolMapComponent,
-    ClassroomsEditorComponent,
-    MessagesComponent
+    ClassroomsEditorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule//,
-    /* TODO: Remove @NgModule.imports import. Simulating. Remove to use real server.*/
-    /*HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )*/
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
 })
