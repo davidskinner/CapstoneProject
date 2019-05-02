@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.ItemProperties.ShortestPathTest PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
-      <File FileName="Program.cs" Line="14" Column="46" />
+      <File FileName="Program.cs" Line="24" Column="16" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,7 +20,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/davidskinner/Documents/Repositories/CapstoneProject/ShortestPathTesting/ShortestPathTest/Program.cs" relfile="Program.cs" line="13" column="1" />
+      <Breakpoint file="/Users/davidskinner/Documents/Repositories/CapstoneProject/ShortestPathTesting/ShortestPathTest/Program.cs" relfile="Program.cs" line="19" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
